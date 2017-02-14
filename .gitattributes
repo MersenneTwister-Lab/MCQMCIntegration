@@ -1,0 +1,5 @@
+html/* linguist-documentation
+configure linguist-generated
+Makefile linguist-generated
+configure linguist-language=generated
+Makefile linguist-language=generated

@@ -1,0 +1,30 @@
+/**
+ *\mainpage
+ *
+ * TruncatedNormalCPP is a C++ version library of Zdravko I. Botev's
+ * R package TruncatedNormal
+ *
+ *<ul>
+ * <li>data structure MCQMCIntegration::MCQMCResult
+ * <li>function MCQMCIntegration::monte_carlo_integration()
+ * <li>function MCQMCIntegration::quasi_monte_carlo_integration()
+ *</ul>
+ *
+ * An example for Quasi Monte-Carlo Integration: example/qmc_example.cpp
+ *\include qmc_example.cpp
+ *
+ * An example for Monte-Carlo Integration: example/mc_example.cpp
+ *\include mc_example.cpp
+ *
+ * @author Shinsuke Mori (Hiroshima University, port to C++)
+ * @author Makoto Matsumoto (Hiroshima University)
+ * @author Mutsuo Saito (little bit modification for publish)
+ *
+ * Copyright (C) 2017 Shinsuke Mori, Makoto Matsumoto, Mutsuo Saito
+ * and Hiroshima University.<br>
+ * All rights reserved.
+ *
+ * @date 2017-02-10
+ *
+ * \verbinclude COPYING
+ */
