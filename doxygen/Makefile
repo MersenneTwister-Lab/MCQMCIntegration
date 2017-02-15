@@ -246,6 +246,10 @@ target_alias =
 top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
+incdir = $(top_srcdir)/include/MCQMCIntegration
+incfiles = $(incdir)/DigitalNet.h \
+	$(incdir)/MCQMCIntegration.h
+
 CLEANFILES = doxyfile.stamp
 all: all-am
 
@@ -441,13 +445,8 @@ uninstall-am:
 
 .PRECIOUS: Makefile
 
-#directory = $(top_srcdir)/doc/
 
-#dist_man_MANS = $(directory)/index.html
-
-index.html: mainpage.txt doxyfile.stamp
-
-doxyfile.stamp:
+doxyfile.stamp: mainpage.txt $(incfiles)
 	$(DOXYGEN) doxygen.cfg
 	echo Timestamp > doxyfile.stamp
 
