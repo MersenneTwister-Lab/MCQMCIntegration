@@ -88,7 +88,8 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = x86_64-apple-darwin15.6.0
 host_triplet = x86_64-apple-darwin15.6.0
-noinst_PROGRAMS = qmc_example$(EXEEXT) mc_example$(EXEEXT)
+noinst_PROGRAMS = qmc_example$(EXEEXT) mc_example$(EXEEXT) \
+	qmc10000_example$(EXEEXT)
 subdir = example
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/ax_cxx_compile_stdcxx.m4 \
@@ -113,6 +114,12 @@ am__v_lt_1 =
 mc_example_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
 	$(CXXFLAGS) $(mc_example_LDFLAGS) $(LDFLAGS) -o $@
+am_qmc10000_example_OBJECTS = qmc10000_example.$(OBJEXT)
+qmc10000_example_OBJECTS = $(am_qmc10000_example_OBJECTS)
+qmc10000_example_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
+	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
+	$(AM_CXXFLAGS) $(CXXFLAGS) $(qmc10000_example_LDFLAGS) \
+	$(LDFLAGS) -o $@
 am_qmc_example_OBJECTS = qmc_example.$(OBJEXT)
 qmc_example_OBJECTS = $(am_qmc_example_OBJECTS)
 qmc_example_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
@@ -152,8 +159,10 @@ AM_V_CXXLD = $(am__v_CXXLD_$(V))
 am__v_CXXLD_ = $(am__v_CXXLD_$(AM_DEFAULT_VERBOSITY))
 am__v_CXXLD_0 = @echo "  CXXLD   " $@;
 am__v_CXXLD_1 = 
-SOURCES = $(mc_example_SOURCES) $(qmc_example_SOURCES)
-DIST_SOURCES = $(mc_example_SOURCES) $(qmc_example_SOURCES)
+SOURCES = $(mc_example_SOURCES) $(qmc10000_example_SOURCES) \
+	$(qmc_example_SOURCES)
+DIST_SOURCES = $(mc_example_SOURCES) $(qmc10000_example_SOURCES) \
+	$(qmc_example_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -239,17 +248,17 @@ OTOOL64 = :
 PACKAGE = mcqmcintegration
 PACKAGE_BUGREPORT = saito@manieth.com
 PACKAGE_NAME = MCQMCIntegration
-PACKAGE_STRING = MCQMCIntegration 0.1
+PACKAGE_STRING = MCQMCIntegration 0.2
 PACKAGE_TARNAME = mcqmcintegration
 PACKAGE_URL = 
-PACKAGE_VERSION = 0.1
+PACKAGE_VERSION = 0.2
 PATH_SEPARATOR = :
 RANLIB = ranlib
 SED = /opt/local/bin/gsed
 SET_MAKE = 
 SHELL = /bin/sh
 STRIP = strip
-VERSION = 0.1
+VERSION = 0.2
 abs_builddir = /Users/saito/git/mkt/MCQMCIntegration/example
 abs_srcdir = /Users/saito/git/mkt/MCQMCIntegration/example
 abs_top_builddir = /Users/saito/git/mkt/MCQMCIntegration
@@ -311,6 +320,10 @@ mc_example_DEPENDENCIES = ../src/libmcqmcint.a
 mc_example_SOURCES = mc_example.cpp
 mc_example_LDADD = -lmcqmcint
 mc_example_LDFLAGS = -L../src
+qmc10000_example_DEPENDENCIES = ../src/libmcqmcint.a
+qmc10000_example_SOURCES = qmc10000_example.cpp
+qmc10000_example_LDADD = -lmcqmcint
+qmc10000_example_LDFLAGS = -L../src
 AM_CXXFLAGS = -I../include -O3 -Wall -Wextra -D__STDC_CONSTANT_MACROS
 all: all-am
 
@@ -359,6 +372,10 @@ mc_example$(EXEEXT): $(mc_example_OBJECTS) $(mc_example_DEPENDENCIES) $(EXTRA_mc
 	@rm -f mc_example$(EXEEXT)
 	$(AM_V_CXXLD)$(mc_example_LINK) $(mc_example_OBJECTS) $(mc_example_LDADD) $(LIBS)
 
+qmc10000_example$(EXEEXT): $(qmc10000_example_OBJECTS) $(qmc10000_example_DEPENDENCIES) $(EXTRA_qmc10000_example_DEPENDENCIES) 
+	@rm -f qmc10000_example$(EXEEXT)
+	$(AM_V_CXXLD)$(qmc10000_example_LINK) $(qmc10000_example_OBJECTS) $(qmc10000_example_LDADD) $(LIBS)
+
 qmc_example$(EXEEXT): $(qmc_example_OBJECTS) $(qmc_example_DEPENDENCIES) $(EXTRA_qmc_example_DEPENDENCIES) 
 	@rm -f qmc_example$(EXEEXT)
 	$(AM_V_CXXLD)$(qmc_example_LINK) $(qmc_example_OBJECTS) $(qmc_example_LDADD) $(LIBS)
@@ -370,6 +387,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 include ./$(DEPDIR)/mc_example.Po
+include ./$(DEPDIR)/qmc10000_example.Po
 include ./$(DEPDIR)/qmc_example.Po
 
 .cpp.o:

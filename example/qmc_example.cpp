@@ -5,6 +5,8 @@
 #include <string>
 #include <cmath>
 
+//#define DEBUG 1
+
 using namespace std;
 using namespace MCQMCIntegration;
 
@@ -44,6 +46,11 @@ int main()
     uint32_t s = 4;
     uint32_t m = 10;
     uint32_t N = 1000;
+#if defined(DEBUG)
+    cout << "s = " << dec << s << endl;
+    cout << "m = " << dec << m << endl;
+    cout << "N = " << dec << N << endl;
+#endif
     const MCQMCResult result
         = quasi_monte_carlo_integration(N,
                                         sphere4d,

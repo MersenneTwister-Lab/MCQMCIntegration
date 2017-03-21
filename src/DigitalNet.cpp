@@ -17,11 +17,13 @@
  * COPYING
  */
 #include "config.h"
-#include "digital_data.h"
 #include "powtwo.h"
 #include "bit_operator.h"
+#include "digital_data.h"
+#include "sobolpoint.h"
 #include <MCQMCIntegration/DigitalNet.h>
 #include <iostream>
+#include <fstream>
 #include <iomanip>
 #include <string>
 #include <stdexcept>
@@ -40,6 +42,7 @@ using namespace std;
 namespace {
     const int N = 64;
     const int S_MIN = 4;
+//    const int S_MAX = 21201;
     const int S_MAX = 10;
     const int M_MIN = 10;
     const int M_MAX = 18;
@@ -162,6 +165,34 @@ namespace {
         return(ones32(x >> 1));
     }
 
+    bool set_sobol_base(uint32_t s, uint32_t m, uint64_t base[])
+    {
+#if defined(DEBUG)
+        cout << "start of set_sobol_base" << endl;
+#endif
+        using namespace MCQMCIntegration;
+        string fname;
+        char * fn = getenv("SOBOL_PATH");
+        if (fn == NULL) {
+            fname = "../data/";
+        } else {
+            fname = fn;
+        }
+        if (fname[fname.size() -1] != '/') {
+            fname += '/';
+        }
+        fname += "sobolbase.dat";
+        ifstream ifs(fname, ios::in | ios::binary);
+        if (!ifs) {
+            cerr << "can't open:" << fname << endl;
+            throw runtime_error("can't open");
+        }
+        bool r = get_sobol_base(ifs, s, m, base);
+#if defined(DEBUG)
+        cout << "end of set_sobol_base" << endl;
+#endif
+        return r;
+    }
 }
 
 namespace MCQMCIntegration {
@@ -263,12 +294,26 @@ namespace MCQMCIntegration {
                                      uint32_t m)
     {
 #if defined(DEBUG)
-        cout << "start of constructor" << endl;
+        cout << "start of constructor id = " << dec << id << endl;
 #endif
         this->s = s;
         this->m = m;
         const dndata * data;
-        if (id == NXLW) {
+        if (id == SOBOL) {
+            base = new uint64_t[s * m];
+            bool success = set_sobol_base(s, m, base);
+            if (!success) {
+                cerr << "can't read" << endl;
+                throw runtime_error("can't read");
+            }
+            this->point_base = NULL;
+            this->point = NULL;
+            this->count = 0;
+#if defined(DEBUG)
+            cout << "end of constructor for sobol" << endl;
+#endif
+            return;
+        } else if (id == NXLW) {
             data = nxlw;
         } else if (id == SOLW) {
             data = solw;
@@ -286,17 +331,30 @@ namespace MCQMCIntegration {
         bool found = false;
         int pos = (start + end) / 2;
         for (;;) {
-            int pos = (start + end) / 2;
+#if defined(DEBUG)
+            cout << "start = " << dec << start << endl;
+            cout << "end = " << end << endl;
+            cout << "pos = " << pos << endl;
+#endif
             if (data[pos].s == this->s && data[pos].m == this->m) {
                 found = true;
                 break;
             }
             if (data[pos].s < this->s ||
                 (data[pos].s == this->s && data[pos].m < this->m)) {
-                start = pos;
+                if (start == pos) {
+                    break;
+                } else {
+                    start = pos;
+                }
             } else {
-                end = pos;
+                if (end == pos) {
+                    break;
+                } else {
+                    end = pos;
+                }
             }
+            pos = (start + end) / 2;
         }
         if (!found) {
             cerr << "can't find (s,m) = ("
@@ -317,6 +375,61 @@ namespace MCQMCIntegration {
         cout << "end of constructor" << endl;
 #endif
     }
+
+#if 0
+/**
+ * Constructor for Sobol reserved data
+ *
+ * file are searched from environment variable SOBOL_PATH
+ *
+ * @param s s value
+ * @param m m value
+ * @exception runtime_error, when can't read data from is.
+ */
+    DigitalNet<uint64_t>::DigitalNet(uint32_t s,
+                                     uint32_t m)
+    {
+#if defined(DEBUG)
+        cout << "start of constructor" << endl;
+#endif
+        string fname;
+        char * fn = getenv("SOBOL_PATH");
+        if (fn == NULL) {
+            fname = "../data/";
+        } else {
+            fname = fn;
+        }
+        if (fname[fname.size() -1] != '/') {
+            fname += '/';
+        }
+        fname += "sobolbase.dat";
+#if defined(DEBUG)
+        cout << "fname = |" << fname << "|" << endl;
+#endif
+        this->s = s;
+        this->m = m;
+        ifstream ifs(fname, ios::in | ios::binary);
+        if (!ifs) {
+            cerr << "can't open:" << fname << endl;
+            throw runtime_error("can't open");
+        }
+        base = new uint64_t[s * m];
+#if defined(DEBUG)
+        cout << "before get_sobol_base" << endl;
+#endif
+        bool success = get_sobol_base(ifs, s, m, base);
+        if (!success) {
+            cerr << "can't read" << endl;
+            throw runtime_error("can't read");
+        }
+        this->point_base = NULL;
+        this->point = NULL;
+        this->count = 0;
+#if defined(DEBUG)
+        cout << "end of constructor" << endl;
+#endif
+    }
+#endif
 
     DigitalNet<uint64_t>::~DigitalNet()
     {
