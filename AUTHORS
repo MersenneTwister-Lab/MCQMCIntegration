@@ -1,5 +1,6 @@
-Original R package:
-Zdravko I. Botev
+Sobol Sequence Generator:
+Frances Kuo <f.kuo@unsw.edu.au>
+Stephen Joe <stephenj@math.waikato.ac.nz>
 
 C++ library:
 Shinsuke Mori <shinsukemori@hiroshima-u.ac.jp>

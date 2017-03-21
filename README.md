@@ -5,6 +5,7 @@ Library to calculate Monte-Carlo and Quasi Monte-Carlo Integration.
 REQUIREMENT
 ===========
 * C++11 or C++14
+* LITTLE ENDIAN System
 
 INSTALL
 =======
@@ -15,6 +16,11 @@ INSTALL
 
 PREPARE
 =======
+set environment variable SOBOL_PATH to point a directory whici include
+sobolbase.dat. for example;
+
+    export SOBOL_PATH=$HOME/QMCIntegration/Sobol/data
+
 set LIBRARY_PATH and CPLUS_INCLUDE_PATH properly.
 
 DOCUMENT
@@ -25,6 +31,9 @@ see [doc/index.html](./doc/index.html)
 
 LICENSE
 =======
+    Copyright (c) 2008, Frances Y. Kuo and Stephen Joe.
+    All rights reserved.
+
     Copyright (C) 2017 Shinsuke Mori, Makoto Matsutmoto, Mutsuo Saito
     and Hiroshima University.
 
