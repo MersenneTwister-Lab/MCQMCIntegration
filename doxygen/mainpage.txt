@@ -4,7 +4,9 @@
  * MCQMCIntegration is a C++ package for Monte Carlo and Quasi Monte Carlo
  * Integration.
  *
- * <a href="./ja/index.html">Japanese Document Page</a>
+ *<ul>
+ * <li><a href="./ja/index.html">Japanese Document Page</a></li>
+ *</ul>
  *
  *<ul>
  * <li>data structure MCQMCIntegration::MCQMCResult
