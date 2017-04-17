@@ -1,8 +1,8 @@
 /**
  *\mainpage
  *
- * TruncatedNormalCPP is a C++ version library of Zdravko I. Botev's
- * R package TruncatedNormal
+ * MCQMCIntegration is a C++ package for Monte Carlo and Quasi Monte Carlo
+ * Integration.
  *
  * <a href="./ja/index.html">Japanese Document Page</a>
  *
