@@ -1,3 +1,4 @@
+EXTRA_DIST = mainpage.txt doxygen.cfg
 if HAVE_DOXYGEN
 
 incdir = $(top_srcdir)/include/MCQMCIntegration

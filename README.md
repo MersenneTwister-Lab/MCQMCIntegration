@@ -25,9 +25,9 @@ set LIBRARY_PATH and CPLUS_INCLUDE_PATH properly.
 
 DOCUMENT
 ========
-see [doc/index.html](./doc/index.html)
-
-
+- [doc/index.html](./doc/index.html)
+- [GitHub Project](https://github.com/MersenneTwister-Lab/MCQMCIntegration)
+- [GitHub Web Page](https://mersennetwister-lab.github.io/MCQMCIntegration/)
 
 LICENSE
 =======

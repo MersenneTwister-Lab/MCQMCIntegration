@@ -3,7 +3,8 @@ doc_dir = doxygen
 endif
 SUBDIRS = src include example $(doc_dir)
 
-EXTRA_DIST = html data
+dist_pkgdata_DATA = data/*
+EXTRA_DIST = docs docs/ja/*.html
 
 ACLOCAL_AMFLAGS = -I m4
 AM_CXXFLAGS = -O3 -Wall -Wextra -D__STDC_CONSTANT_MACROS

@@ -86,8 +86,8 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-build_triplet = x86_64-apple-darwin15.6.0
-host_triplet = x86_64-apple-darwin15.6.0
+build_triplet = x86_64-apple-darwin16.5.0
+host_triplet = x86_64-apple-darwin16.5.0
 noinst_PROGRAMS = qmc_example$(EXEEXT) mc_example$(EXEEXT) \
 	qmc_largesobol_example$(EXEEXT)
 subdir = example
@@ -107,24 +107,16 @@ CONFIG_CLEAN_VPATH_FILES =
 PROGRAMS = $(noinst_PROGRAMS)
 am_mc_example_OBJECTS = mc_example.$(OBJEXT)
 mc_example_OBJECTS = $(am_mc_example_OBJECTS)
-AM_V_lt = $(am__v_lt_$(V))
-am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
-am__v_lt_0 = --silent
-am__v_lt_1 = 
-mc_example_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
-	$(CXXFLAGS) $(mc_example_LDFLAGS) $(LDFLAGS) -o $@
+mc_example_LINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) \
+	$(mc_example_LDFLAGS) $(LDFLAGS) -o $@
 am_qmc_example_OBJECTS = qmc_example.$(OBJEXT)
 qmc_example_OBJECTS = $(am_qmc_example_OBJECTS)
-qmc_example_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
-	$(CXXFLAGS) $(qmc_example_LDFLAGS) $(LDFLAGS) -o $@
+qmc_example_LINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) \
+	$(qmc_example_LDFLAGS) $(LDFLAGS) -o $@
 am_qmc_largesobol_example_OBJECTS = qmc_largesobol_example.$(OBJEXT)
 qmc_largesobol_example_OBJECTS = $(am_qmc_largesobol_example_OBJECTS)
-qmc_largesobol_example_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
-	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CXXLD) \
-	$(AM_CXXFLAGS) $(CXXFLAGS) $(qmc_largesobol_example_LDFLAGS) \
-	$(LDFLAGS) -o $@
+qmc_largesobol_example_LINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) \
+	$(qmc_largesobol_example_LDFLAGS) $(LDFLAGS) -o $@
 AM_V_P = $(am__v_P_$(V))
 am__v_P_ = $(am__v_P_$(AM_DEFAULT_VERBOSITY))
 am__v_P_0 = false
@@ -143,36 +135,25 @@ am__depfiles_maybe = depfiles
 am__mv = mv -f
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
-LTCXXCOMPILE = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) \
-	$(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) \
-	$(AM_CXXFLAGS) $(CXXFLAGS)
 AM_V_CXX = $(am__v_CXX_$(V))
 am__v_CXX_ = $(am__v_CXX_$(AM_DEFAULT_VERBOSITY))
 am__v_CXX_0 = @echo "  CXX     " $@;
 am__v_CXX_1 = 
 CXXLD = $(CXX)
-CXXLINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
-	$(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
+CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \
+	-o $@
 AM_V_CXXLD = $(am__v_CXXLD_$(V))
 am__v_CXXLD_ = $(am__v_CXXLD_$(AM_DEFAULT_VERBOSITY))
 am__v_CXXLD_0 = @echo "  CXXLD   " $@;
 am__v_CXXLD_1 = 
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
-LTCOMPILE = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) \
-	$(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) \
-	$(AM_CFLAGS) $(CFLAGS)
 AM_V_CC = $(am__v_CC_$(V))
 am__v_CC_ = $(am__v_CC_$(AM_DEFAULT_VERBOSITY))
 am__v_CC_0 = @echo "  CC      " $@;
 am__v_CC_1 = 
 CCLD = $(CC)
-LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
-	$(AM_LDFLAGS) $(LDFLAGS) -o $@
+LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
 AM_V_CCLD = $(am__v_CCLD_$(V))
 am__v_CCLD_ = $(am__v_CCLD_$(AM_DEFAULT_VERBOSITY))
 am__v_CCLD_0 = @echo "  CCLD    " $@;
@@ -210,91 +191,71 @@ DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = ${SHELL} /Users/saito/git/mkt/MCQMCIntegration/missing aclocal-1.15
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 1
-AR = ar
 AUTOCONF = ${SHELL} /Users/saito/git/mkt/MCQMCIntegration/missing autoconf
 AUTOHEADER = ${SHELL} /Users/saito/git/mkt/MCQMCIntegration/missing autoheader
 AUTOMAKE = ${SHELL} /Users/saito/git/mkt/MCQMCIntegration/missing automake-1.15
-AWK = gawk
+AWK = awk
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -g -O2
-CPP = gcc -E
+CFLAGS = 
 CPPFLAGS = 
 CXX = g++ -std=c++14
-CXXCPP = g++ -E
+CXXCPP = g++ -std=c++14 -E
 CXXDEPMODE = depmode=gcc3
 CXXFLAGS = 
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
-DLLTOOL = false
 DOXYGEN = doxygen
-DSYMUTIL = dsymutil
-DUMPBIN = 
 ECHO_C = \c
 ECHO_N = 
 ECHO_T = 
 EGREP = /usr/bin/grep -E
 EXEEXT = 
-FGREP = /usr/bin/grep -F
 GREP = /usr/bin/grep
 HAVE_CXX11 = 1
 HAVE_CXX14 = 1
-INSTALL = /opt/local/bin/ginstall -c
+INSTALL = /usr/local/opt/coreutils/libexec/gnubin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
-LD = /opt/local/bin/ld
 LDFLAGS = 
 LIBOBJS = 
 LIBS = 
-LIBTOOL = $(SHELL) $(top_builddir)/libtool
-LIPO = lipo
-LN_S = ln -s
 LTLIBOBJS = 
-LT_SYS_LIBRARY_PATH = 
 MAKEINFO = ${SHELL} /Users/saito/git/mkt/MCQMCIntegration/missing makeinfo
-MANIFEST_TOOL = :
-MKDIR_P = /opt/local/bin/gmkdir -p
-NM = /opt/local/bin/nm -B
-NMEDIT = nmedit
-OBJDUMP = false
+MKDIR_P = /usr/local/opt/coreutils/libexec/gnubin/mkdir -p
 OBJEXT = o
-OTOOL = otool
-OTOOL64 = :
 PACKAGE = mcqmcintegration
 PACKAGE_BUGREPORT = saito@manieth.com
 PACKAGE_NAME = MCQMCIntegration
-PACKAGE_STRING = MCQMCIntegration 0.2
+PACKAGE_STRING = MCQMCIntegration 0.3
 PACKAGE_TARNAME = mcqmcintegration
 PACKAGE_URL = 
-PACKAGE_VERSION = 0.2
+PACKAGE_VERSION = 0.3
 PATH_SEPARATOR = :
 RANLIB = ranlib
-SED = /opt/local/bin/gsed
 SET_MAKE = 
 SHELL = /bin/sh
-STRIP = strip
-VERSION = 0.2
+STRIP = 
+VERSION = 0.3
 abs_builddir = /Users/saito/git/mkt/MCQMCIntegration/example
 abs_srcdir = /Users/saito/git/mkt/MCQMCIntegration/example
 abs_top_builddir = /Users/saito/git/mkt/MCQMCIntegration
 abs_top_srcdir = /Users/saito/git/mkt/MCQMCIntegration
-ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_CXX = g++
-ac_ct_DUMPBIN = 
 am__include = include
 am__leading_dot = .
 am__quote = 
 am__tar = $${TAR-tar} chof - "$$tardir"
 am__untar = $${TAR-tar} xf -
 bindir = ${exec_prefix}/bin
-build = x86_64-apple-darwin15.6.0
+build = x86_64-apple-darwin16.5.0
 build_alias = 
 build_cpu = x86_64
-build_os = darwin15.6.0
+build_os = darwin16.5.0
 build_vendor = apple
 builddir = .
 datadir = ${datarootdir}
@@ -302,10 +263,10 @@ datarootdir = ${prefix}/share
 docdir = ${datarootdir}/doc/${PACKAGE_TARNAME}
 dvidir = ${docdir}
 exec_prefix = ${prefix}
-host = x86_64-apple-darwin15.6.0
+host = x86_64-apple-darwin16.5.0
 host_alias = 
 host_cpu = x86_64
-host_os = darwin15.6.0
+host_os = darwin16.5.0
 host_vendor = apple
 htmldir = ${docdir}
 includedir = ${prefix}/include
@@ -348,7 +309,7 @@ AM_CXXFLAGS = -I../include -O3 -Wall -Wextra -D__STDC_CONSTANT_MACROS
 all: all-am
 
 .SUFFIXES:
-.SUFFIXES: .cpp .lo .o .obj
+.SUFFIXES: .cpp .o .obj
 $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
@@ -380,13 +341,7 @@ $(ACLOCAL_M4):  $(am__aclocal_m4_deps)
 $(am__aclocal_m4_deps):
 
 clean-noinstPROGRAMS:
-	@list='$(noinst_PROGRAMS)'; test -n "$$list" || exit 0; \
-	echo " rm -f" $$list; \
-	rm -f $$list || exit $$?; \
-	test -n "$(EXEEXT)" || exit 0; \
-	list=`for p in $$list; do echo "$$p"; done | sed 's/$(EXEEXT)$$//'`; \
-	echo " rm -f" $$list; \
-	rm -f $$list
+	-test -z "$(noinst_PROGRAMS)" || rm -f $(noinst_PROGRAMS)
 
 mc_example$(EXEEXT): $(mc_example_OBJECTS) $(mc_example_DEPENDENCIES) $(EXTRA_mc_example_DEPENDENCIES) 
 	@rm -f mc_example$(EXEEXT)
@@ -423,19 +378,6 @@ include ./$(DEPDIR)/qmc_largesobol_example.Po
 #	$(AM_V_CXX)source='$<' object='$@' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
-
-.cpp.lo:
-	$(AM_V_CXX)$(LTCXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
-	$(AM_V_at)$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Plo
-#	$(AM_V_CXX)source='$<' object='$@' libtool=yes \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(LTCXXCOMPILE) -c -o $@ $<
-
-mostlyclean-libtool:
-	-rm -f *.lo
-
-clean-libtool:
-	-rm -rf .libs _libs
 
 ID: $(am__tagged_files)
 	$(am__define_uniq_tagged_files); mkid -fID $$unique
@@ -555,8 +497,7 @@ maintainer-clean-generic:
 	@echo "it deletes files that may require special tools to rebuild."
 clean: clean-am
 
-clean-am: clean-generic clean-libtool clean-noinstPROGRAMS \
-	mostlyclean-am
+clean-am: clean-generic clean-noinstPROGRAMS mostlyclean-am
 
 distclean: distclean-am
 	-rm -rf ./$(DEPDIR)
@@ -611,8 +552,7 @@ maintainer-clean-am: distclean-am maintainer-clean-generic
 
 mostlyclean: mostlyclean-am
 
-mostlyclean-am: mostlyclean-compile mostlyclean-generic \
-	mostlyclean-libtool
+mostlyclean-am: mostlyclean-compile mostlyclean-generic
 
 pdf: pdf-am
 
@@ -627,18 +567,17 @@ uninstall-am:
 .MAKE: install-am install-strip
 
 .PHONY: CTAGS GTAGS TAGS all all-am check check-am clean clean-generic \
-	clean-libtool clean-noinstPROGRAMS cscopelist-am ctags \
-	ctags-am distclean distclean-compile distclean-generic \
-	distclean-libtool distclean-tags distdir dvi dvi-am html \
-	html-am info info-am install install-am install-data \
-	install-data-am install-dvi install-dvi-am install-exec \
-	install-exec-am install-html install-html-am install-info \
-	install-info-am install-man install-pdf install-pdf-am \
-	install-ps install-ps-am install-strip installcheck \
-	installcheck-am installdirs maintainer-clean \
+	clean-noinstPROGRAMS cscopelist-am ctags ctags-am distclean \
+	distclean-compile distclean-generic distclean-tags distdir dvi \
+	dvi-am html html-am info info-am install install-am \
+	install-data install-data-am install-dvi install-dvi-am \
+	install-exec install-exec-am install-html install-html-am \
+	install-info install-info-am install-man install-pdf \
+	install-pdf-am install-ps install-ps-am install-strip \
+	installcheck installcheck-am installdirs maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-compile \
-	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
-	tags tags-am uninstall uninstall-am
+	mostlyclean-generic pdf pdf-am ps ps-am tags tags-am uninstall \
+	uninstall-am
 
 .PRECIOUS: Makefile
 

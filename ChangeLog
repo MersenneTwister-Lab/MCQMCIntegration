@@ -1,3 +1,8 @@
+2017-04-17  Mutsuo Saito <saito@manieth.com>
+
+	* Add Japanese Documents
+	* Fix doxygen Makefile.am to distribute files.
+
 2017-03-21  Mutsuo Saito <saito@manieth.com>
 
 	* Add Large Sobol Sequence

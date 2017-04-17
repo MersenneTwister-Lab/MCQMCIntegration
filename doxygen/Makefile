@@ -85,8 +85,8 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-build_triplet = x86_64-apple-darwin15.6.0
-host_triplet = x86_64-apple-darwin15.6.0
+build_triplet = x86_64-apple-darwin16.5.0
+host_triplet = x86_64-apple-darwin16.5.0
 subdir = doxygen
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/ax_cxx_compile_stdcxx.m4 \
@@ -126,91 +126,71 @@ DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = ${SHELL} /Users/saito/git/mkt/MCQMCIntegration/missing aclocal-1.15
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 1
-AR = ar
 AUTOCONF = ${SHELL} /Users/saito/git/mkt/MCQMCIntegration/missing autoconf
 AUTOHEADER = ${SHELL} /Users/saito/git/mkt/MCQMCIntegration/missing autoheader
 AUTOMAKE = ${SHELL} /Users/saito/git/mkt/MCQMCIntegration/missing automake-1.15
-AWK = gawk
+AWK = awk
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -g -O2
-CPP = gcc -E
+CFLAGS = 
 CPPFLAGS = 
 CXX = g++ -std=c++14
-CXXCPP = g++ -E
+CXXCPP = g++ -std=c++14 -E
 CXXDEPMODE = depmode=gcc3
 CXXFLAGS = 
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
-DLLTOOL = false
 DOXYGEN = doxygen
-DSYMUTIL = dsymutil
-DUMPBIN = 
 ECHO_C = \c
 ECHO_N = 
 ECHO_T = 
 EGREP = /usr/bin/grep -E
 EXEEXT = 
-FGREP = /usr/bin/grep -F
 GREP = /usr/bin/grep
 HAVE_CXX11 = 1
 HAVE_CXX14 = 1
-INSTALL = /opt/local/bin/ginstall -c
+INSTALL = /usr/local/opt/coreutils/libexec/gnubin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
-LD = /opt/local/bin/ld
 LDFLAGS = 
 LIBOBJS = 
 LIBS = 
-LIBTOOL = $(SHELL) $(top_builddir)/libtool
-LIPO = lipo
-LN_S = ln -s
 LTLIBOBJS = 
-LT_SYS_LIBRARY_PATH = 
 MAKEINFO = ${SHELL} /Users/saito/git/mkt/MCQMCIntegration/missing makeinfo
-MANIFEST_TOOL = :
-MKDIR_P = /opt/local/bin/gmkdir -p
-NM = /opt/local/bin/nm -B
-NMEDIT = nmedit
-OBJDUMP = false
+MKDIR_P = /usr/local/opt/coreutils/libexec/gnubin/mkdir -p
 OBJEXT = o
-OTOOL = otool
-OTOOL64 = :
 PACKAGE = mcqmcintegration
 PACKAGE_BUGREPORT = saito@manieth.com
 PACKAGE_NAME = MCQMCIntegration
-PACKAGE_STRING = MCQMCIntegration 0.2
+PACKAGE_STRING = MCQMCIntegration 0.3
 PACKAGE_TARNAME = mcqmcintegration
 PACKAGE_URL = 
-PACKAGE_VERSION = 0.2
+PACKAGE_VERSION = 0.3
 PATH_SEPARATOR = :
 RANLIB = ranlib
-SED = /opt/local/bin/gsed
 SET_MAKE = 
 SHELL = /bin/sh
-STRIP = strip
-VERSION = 0.2
+STRIP = 
+VERSION = 0.3
 abs_builddir = /Users/saito/git/mkt/MCQMCIntegration/doxygen
 abs_srcdir = /Users/saito/git/mkt/MCQMCIntegration/doxygen
 abs_top_builddir = /Users/saito/git/mkt/MCQMCIntegration
 abs_top_srcdir = /Users/saito/git/mkt/MCQMCIntegration
-ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_CXX = g++
-ac_ct_DUMPBIN = 
 am__include = include
 am__leading_dot = .
 am__quote = 
 am__tar = $${TAR-tar} chof - "$$tardir"
 am__untar = $${TAR-tar} xf -
 bindir = ${exec_prefix}/bin
-build = x86_64-apple-darwin15.6.0
+build = x86_64-apple-darwin16.5.0
 build_alias = 
 build_cpu = x86_64
-build_os = darwin15.6.0
+build_os = darwin16.5.0
 build_vendor = apple
 builddir = .
 datadir = ${datarootdir}
@@ -218,10 +198,10 @@ datarootdir = ${prefix}/share
 docdir = ${datarootdir}/doc/${PACKAGE_TARNAME}
 dvidir = ${docdir}
 exec_prefix = ${prefix}
-host = x86_64-apple-darwin15.6.0
+host = x86_64-apple-darwin16.5.0
 host_alias = 
 host_cpu = x86_64
-host_os = darwin15.6.0
+host_os = darwin16.5.0
 host_vendor = apple
 htmldir = ${docdir}
 includedir = ${prefix}/include
@@ -246,6 +226,7 @@ target_alias =
 top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
+EXTRA_DIST = mainpage.txt doxygen.cfg
 incdir = $(top_srcdir)/include/MCQMCIntegration
 incfiles = $(incdir)/DigitalNet.h \
 	$(incdir)/MCQMCIntegration.h
@@ -283,12 +264,6 @@ $(top_srcdir)/configure:  $(am__configure_deps)
 $(ACLOCAL_M4):  $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(am__aclocal_m4_deps):
-
-mostlyclean-libtool:
-	-rm -f *.lo
-
-clean-libtool:
-	-rm -rf .libs _libs
 tags TAGS:
 
 ctags CTAGS:
@@ -364,7 +339,7 @@ maintainer-clean-generic:
 	@echo "it deletes files that may require special tools to rebuild."
 clean: clean-am
 
-clean-am: clean-generic clean-libtool mostlyclean-am
+clean-am: clean-generic mostlyclean-am
 
 distclean: distclean-am
 	-rm -f Makefile
@@ -416,7 +391,7 @@ maintainer-clean-am: distclean-am maintainer-clean-generic
 
 mostlyclean: mostlyclean-am
 
-mostlyclean-am: mostlyclean-generic mostlyclean-libtool
+mostlyclean-am: mostlyclean-generic
 
 pdf: pdf-am
 
@@ -431,17 +406,15 @@ uninstall-am:
 .MAKE: install-am install-strip
 
 .PHONY: all all-am all-local check check-am clean clean-generic \
-	clean-libtool cscopelist-am ctags-am distclean \
-	distclean-generic distclean-libtool distdir dvi dvi-am html \
-	html-am info info-am install install-am install-data \
-	install-data-am install-dvi install-dvi-am install-exec \
-	install-exec-am install-html install-html-am install-info \
-	install-info-am install-man install-pdf install-pdf-am \
-	install-ps install-ps-am install-strip installcheck \
-	installcheck-am installdirs maintainer-clean \
-	maintainer-clean-generic mostlyclean mostlyclean-generic \
-	mostlyclean-libtool pdf pdf-am ps ps-am tags-am uninstall \
-	uninstall-am
+	cscopelist-am ctags-am distclean distclean-generic distdir dvi \
+	dvi-am html html-am info info-am install install-am \
+	install-data install-data-am install-dvi install-dvi-am \
+	install-exec install-exec-am install-html install-html-am \
+	install-info install-info-am install-man install-pdf \
+	install-pdf-am install-ps install-ps-am install-strip \
+	installcheck installcheck-am installdirs maintainer-clean \
+	maintainer-clean-generic mostlyclean mostlyclean-generic pdf \
+	pdf-am ps ps-am tags-am uninstall uninstall-am
 
 .PRECIOUS: Makefile
 
