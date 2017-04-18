@@ -1,4 +1,4 @@
-html/* linguist-documentation
+docs/* linguist-documentation
 configure linguist-generated
 Makefile linguist-generated
 configure linguist-language=generated

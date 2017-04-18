@@ -112,7 +112,7 @@ MCQMCIntegration::monte_carlo_integration()の引数
 ---------------------------------------------
 <dl>
   <dt>value</dt>
-  <dd>数値積分の結果の平均値。合計値を求めるには2^m倍する必要がある。</dd>
+  <dd>数値積分の結果の平均値。</dd>
 
   <dt>error</dt>
   <dd>絶対誤差</dd>
