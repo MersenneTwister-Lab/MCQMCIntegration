@@ -27,3 +27,14 @@
 *.exe
 *.out
 *.app
+
+# Autotools
+Makefile
+autom4te.cache
+config.log
+.deps/
+stamp-h1
+Makefile.in
+
+#emacs
+*~
