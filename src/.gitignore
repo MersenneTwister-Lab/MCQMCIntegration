@@ -1,5 +1,5 @@
 sobolpoint
-test-suite.log
 test_minmax
-test_minmax.log
-test_minmax.trs
+test_dn
+*.trs
+*.log

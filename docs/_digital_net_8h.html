@@ -46,7 +46,8 @@ $(function() {
 <a href="#nested-classes">Data Structures</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#define-members">Macros</a> &#124;
-<a href="#enum-members">Enumerations</a>  </div>
+<a href="#enum-members">Enumerations</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">DigitalNet.h File Reference</div>  </div>
 </div><!--header-->
@@ -84,12 +85,30 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:ae16e0540efd559e5c38e8d397e00f13c"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_m_c_q_m_c_integration.html#ae16e0540efd559e5c38e8d397e00f13c">MCQMCIntegration::DigitalNetID</a> { <a class="el" href="namespace_m_c_q_m_c_integration.html#ae16e0540efd559e5c38e8d397e00f13ca4ac0e8c028ca3c1efc84436b50fbf1dd">MCQMCIntegration::SOBOL</a> = 1, 
+<tr class="memitem:ae16e0540efd559e5c38e8d397e00f13c"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_m_c_q_m_c_integration.html#ae16e0540efd559e5c38e8d397e00f13c">MCQMCIntegration::DigitalNetID</a> { <a class="el" href="namespace_m_c_q_m_c_integration.html#ae16e0540efd559e5c38e8d397e00f13caa30b94e2a11c9de44682df07603fb61e">MCQMCIntegration::NX</a> = 0, 
+<a class="el" href="namespace_m_c_q_m_c_integration.html#ae16e0540efd559e5c38e8d397e00f13ca4ac0e8c028ca3c1efc84436b50fbf1dd">MCQMCIntegration::SOBOL</a> = 1, 
 <a class="el" href="namespace_m_c_q_m_c_integration.html#ae16e0540efd559e5c38e8d397e00f13ca93b5c701233f4114aaafbfac77bb404a">MCQMCIntegration::NXLW</a> = 3, 
 <a class="el" href="namespace_m_c_q_m_c_integration.html#ae16e0540efd559e5c38e8d397e00f13ca8a79499c8ed52a9d8431e2582a1253c8">MCQMCIntegration::SOLW</a> = 4
  }<tr class="memdesc:ae16e0540efd559e5c38e8d397e00f13c"><td class="mdescLeft">&#160;</td><td class="mdescRight">ID of pre-defined Digital Net.  <a href="namespace_m_c_q_m_c_integration.html#ae16e0540efd559e5c38e8d397e00f13c">More...</a><br /></td></tr>
 </td></tr>
 <tr class="separator:ae16e0540efd559e5c38e8d397e00f13c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a8598f570b306ec834a2d49e6e468533a"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_m_c_q_m_c_integration.html#a8598f570b306ec834a2d49e6e468533a">MCQMCIntegration::getSMax</a> (DigitalNetID id)</td></tr>
+<tr class="memdesc:a8598f570b306ec834a2d49e6e468533a"><td class="mdescLeft">&#160;</td><td class="mdescRight">get maximum number of pre-defined digital net dimension <b>s</b>.  <a href="namespace_m_c_q_m_c_integration.html#a8598f570b306ec834a2d49e6e468533a">More...</a><br /></td></tr>
+<tr class="separator:a8598f570b306ec834a2d49e6e468533a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac48bd29357429b7c99c9ad62d7dbd412"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_m_c_q_m_c_integration.html#ac48bd29357429b7c99c9ad62d7dbd412">MCQMCIntegration::getSMin</a> (DigitalNetID id)</td></tr>
+<tr class="memdesc:ac48bd29357429b7c99c9ad62d7dbd412"><td class="mdescLeft">&#160;</td><td class="mdescRight">get minimum number of pre-defined digital net dimension <b>s</b>.  <a href="namespace_m_c_q_m_c_integration.html#ac48bd29357429b7c99c9ad62d7dbd412">More...</a><br /></td></tr>
+<tr class="separator:ac48bd29357429b7c99c9ad62d7dbd412"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b70954bf4940aa044408f5877fb9c6d"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_m_c_q_m_c_integration.html#a1b70954bf4940aa044408f5877fb9c6d">MCQMCIntegration::getMMax</a> (DigitalNetID id, uint32_t s)</td></tr>
+<tr class="memdesc:a1b70954bf4940aa044408f5877fb9c6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">get maximum number of pre-defined digital net F2 dimension <b>m</b>.  <a href="namespace_m_c_q_m_c_integration.html#a1b70954bf4940aa044408f5877fb9c6d">More...</a><br /></td></tr>
+<tr class="separator:a1b70954bf4940aa044408f5877fb9c6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a3bd498243becd8c9e654f72275e772"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_m_c_q_m_c_integration.html#a4a3bd498243becd8c9e654f72275e772">MCQMCIntegration::getMMin</a> (DigitalNetID id, uint32_t s)</td></tr>
+<tr class="memdesc:a4a3bd498243becd8c9e654f72275e772"><td class="mdescLeft">&#160;</td><td class="mdescRight">get minimum number of pre-defined digital net F2 dimension <b>m</b>.  <a href="namespace_m_c_q_m_c_integration.html#a4a3bd498243becd8c9e654f72275e772">More...</a><br /></td></tr>
+<tr class="separator:a4a3bd498243becd8c9e654f72275e772"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e57a2122195bddadef794be4701eac3"><td class="memItemLeft" align="right" valign="top">const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_m_c_q_m_c_integration.html#a7e57a2122195bddadef794be4701eac3">MCQMCIntegration::getDigitalNetName</a> (uint32_t index)</td></tr>
+<tr class="separator:a7e57a2122195bddadef794be4701eac3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>DigitalNet class for Quasi Monte-Carlo Method. </p>
@@ -119,7 +138,7 @@ Mutsuo Saito</dd></dl>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri May 12 2017 08:45:22 for MCQMCIntegration by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Aug 3 2017 12:24:04 for MCQMCIntegration by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

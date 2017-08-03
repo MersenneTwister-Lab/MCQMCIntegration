@@ -861,6 +861,7 @@ namespace MCQMCIntegration {
         point = NULL;
         count = 0;
         digitalShift = false;
+        pointInitialize();
     }
 
 /**
@@ -891,6 +892,7 @@ namespace MCQMCIntegration {
         point = NULL;
         count = 0;
         digitalShift = false;
+        pointInitialize();
     }
 
     DigitalNet<uint64_t>::~DigitalNet()
