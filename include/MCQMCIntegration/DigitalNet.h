@@ -32,6 +32,8 @@ namespace MCQMCIntegration {
      * ID of pre-defined Digital Net.
      */
     enum DigitalNetID {
+        /** Niederreiter-Xing Point Set. */
+        NX = 0,
         /** Sobol Point Set up to dimension 21201. */
         SOBOL = 1,
         /** Niederreiter-Xing point set of Low WAFOM. */
@@ -40,6 +42,31 @@ namespace MCQMCIntegration {
         SOLW = 4
     };
 
+    /**
+     * get maximum number of pre-defined digital net dimension @b s.
+     * @return maximum number of pre-defined digital net dimension @b s.
+     */
+    uint32_t getSMax(DigitalNetID id);
+
+    /**
+     * get minimum number of pre-defined digital net dimension @b s.
+     * @return minimum number of pre-defined digital net dimension @b s.
+     */
+    uint32_t getSMin(DigitalNetID id);
+
+    /**
+     * get maximum number of pre-defined digital net F2 dimension @b m.
+     * @return maximum number of pre-defined digital net F2 dimension @b m.
+     */
+    uint32_t getMMax(DigitalNetID id, uint32_t s);
+
+    /**
+     * get minimum number of pre-defined digital net F2 dimension @b m.
+     * @return minimum number of pre-defined digital net F2 dimension @b m.
+     */
+    uint32_t getMMin(DigitalNetID id, uint32_t s);
+
+    const std::string getDigitalNetName(uint32_t index);
     /**
      * Digital Net class for Quasi Mote-Carlo Method.
      * This class is almost dummy.
@@ -51,12 +78,7 @@ namespace MCQMCIntegration {
     public:
         static const char * getDataPath();
         static uint32_t getParameterSize();
-        static const std::string getDigitalNetName(uint32_t index);
         static const std::string getDigitalNetConstruction(uint32_t index);
-        static uint32_t getSMax();
-        static uint32_t getSMin();
-        static uint32_t getMMax();
-        static uint32_t getMMin();
     private:
         ~DigitalNet();
         DigitalNet(int s, int m);
@@ -74,16 +96,14 @@ namespace MCQMCIntegration {
         // First of all, forbid copy and assign.
         DigitalNet(const DigitalNet<uint64_t>& that);
         DigitalNet<uint64_t>& operator=(const DigitalNet<uint64_t>&);
-        class Gray {
+        class GrayIndex {
         public:
-            Gray();
+            GrayIndex();
             void clear();
-            uint32_t next();
+            void next();
             int index();
         private:
-            uint32_t count;
-            uint32_t gray;
-            uint32_t pre;
+            uint64_t count;
         };
 
     public:
@@ -171,11 +191,6 @@ namespace MCQMCIntegration {
         void showStatus(std::ostream& os);
 
         /**
-         * scramble base data
-         */
-        void scramble();
-
-        /**
          * (re-)initialize point.
          */
         void pointInitialize();
@@ -185,6 +200,9 @@ namespace MCQMCIntegration {
          */
         void nextPoint();
 
+        void setDigitalShift(bool value) {
+            digitalShift = value;
+        }
         /**
          * set seed for random number generator for scramble.
          */
@@ -205,66 +223,22 @@ namespace MCQMCIntegration {
         int64_t getTvalue() {
             return tvalue;
         }
-#if 0
-        /**
-         * get a file path for predefined data.
-         * @return a file path for predefined data.
-         */
-        static const char * getDataPath();
-
-        /**
-         * get number of predefined data kinds.
-         * @return number of predefined data kinds.
-         */
-        static uint32_t getParameterSize();
-
-        /**
-         * get a name of pre-defined digital net.
-         * @return a name of pre-defined digital net.
-         */
-        static const std::string getDigitalNetName(uint32_t index);
-
-        /**
-         * get explanation of pre-defined digital net.
-         * @return explanation of pre-defined digital net.
-         */
-        static const std::string getDigitalNetConstruction(uint32_t index);
-#endif
-        /**
-         * get maximum number of pre-defined digital net dimension @b s.
-         * @return maximum number of pre-defined digital net dimension @b s.
-         */
-        static uint32_t getSMax();
-
-        /**
-         * get minimum number of pre-defined digital net dimension @b s.
-         * @return minimum number of pre-defined digital net dimension @b s.
-         */
-        static uint32_t getSMin();
-
-        /**
-         * get maximum number of pre-defined digital net F2 dimension @b m.
-         * @return maximum number of pre-defined digital net F2 dimension @b m.
-         */
-        static uint32_t getMMax();
-
-        /**
-         * get minimum number of pre-defined digital net F2 dimension @b m.
-         * @return minimum number of pre-defined digital net F2 dimension @b m.
-         */
-        static uint32_t getMMin();
     private:
         void setBase(int i, int j, uint64_t value) {
             base[i * s + j] = value;
         }
-        void scramble(int i, int j, int l);
+        void convertPoint();
         uint32_t s;
         uint32_t m;
         uint64_t *shift;
         uint64_t count;
+        bool digitalShift;
+        int get_max;
+        double factor;
+        double eps;
         double wafom;
         int64_t tvalue;
-        Gray gray;
+        GrayIndex grayindex;
         std::mt19937_64 mt;
         uint64_t * base;
         uint64_t * point_base;

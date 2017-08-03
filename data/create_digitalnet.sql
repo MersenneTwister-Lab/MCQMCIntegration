@@ -17,10 +17,3 @@ create table digital_tb (
         data text,
         primary key (id, bitsize, dimr, dimf2)
         );
-
-/* view */
-drop view digitalnet;
-create view digitalnet as select
-    name as netname, i.id, bitsize, dimr, dimf2, wafom, tvalue, data
-    from digital_tb t join digitalnet_id i
-    where t.id = i.id;

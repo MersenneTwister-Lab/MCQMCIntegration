@@ -152,6 +152,26 @@ namespace MCQMCIntegration {
         }
         return true;
     }
+
+    int get_sobol_s_max() {
+        return 21201;
+    }
+
+    int get_sobol_s_min()
+    {
+        return 2;
+    }
+
+    int get_sobol_m_max()
+    {
+        // 2^32 は、ぎりぎり無理のはず
+        return 31;
+    }
+
+    int get_sobol_m_min()
+    {
+        return 8;
+    }
 }
 
 namespace {

@@ -32,6 +32,8 @@ AX_CXX_COMPILE_STDCXX_11(noext, mandatory)
 
 AC_CHECK_HEADERS([inttypes.h stdint.h stdlib.h])
 
+AC_CHECK_LIB(sqlite3, sqlite3_open, [], [ AC_MSG_ERROR(Need sqlite3) ])
+
 AC_LANG_POP
 
 AX_GCC_BUILTIN(__builtin_popcount)

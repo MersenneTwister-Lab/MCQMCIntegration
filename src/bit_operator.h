@@ -68,48 +68,6 @@ static inline int ones(uint64_t x) {
 #endif
 }
 
-#if 0
-/**
- * count leading zero from MSB
- * SIMD within a Register algorithm
- * citing from a website http://aggregate.org/MAGIC/
- * @param[in] x bit pattern
- * @return number of 0s from MSB in \b x.
- */
-static inline int leadingZeroCount(uint32_t x) {
-#if HAVE___BUILTIN_CLZ
-    return __builtin_clz(x);
-#else
-    x |= (x >> 1);
-    x |= (x >> 2);
-    x |= (x >> 4);
-    x |= (x >> 8);
-    x |= (x >> 16);
-    return 32 - ones(x);
-#endif
-}
-
-/**
- * count leading zero from MSB
- * SIMD within a Register algorithm
- * citing from a website http://aggregate.org/MAGIC/
- * @param[in] x bit pattern
- * @return number of 0s from MSB in \b x.
- */
-static inline int leadingZeroCount(uint64_t x) {
-#if HAVE___BUILTIN_CLZL
-    return __builtin_clzl(x);
-#else
-    x |= (x >> 1);
-    x |= (x >> 2);
-    x |= (x >> 4);
-    x |= (x >> 8);
-    x |= (x >> 16);
-    x |= (x >> 32);
-    return 64 - ones(x);
-#endif
-}
-#endif
 
 /**
  * position of least significant one bit
@@ -191,6 +149,16 @@ static inline uint64_t reverseBit(uint64_t x)
 static inline int getBit(uint64_t x, uint32_t pos)
 {
     return (x >> pos) & 1;
+}
+
+static inline int tailingZeroBit(uint32_t x)
+{
+    return(ones((x & -x) - 1));
+}
+
+static inline int tailingZeroBit(uint64_t x)
+{
+    return(ones((x & -x) - 1));
 }
 
 #endif // BIT_OPERATOR_H
