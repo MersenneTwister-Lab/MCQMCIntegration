@@ -128,6 +128,7 @@ namespace MCQMCIntegration {
                                                   int probability = 99)
     {
         uint32_t m = digitalNet.getM();
+        digitalNet.setDigitalShift(true);
         digitalNet.pointInitialize();
         OnlineVariance eachintval;
         uint32_t cnt = 0;
@@ -140,6 +141,7 @@ namespace MCQMCIntegration {
                 digitalNet.nextPoint();
             }
             eachintval.addData(intsum.getMean());
+            digitalNet.pointInitialize();
             cnt++;
         } while ( cnt < N );
         return MCQMCResult({eachintval.getMean(),
@@ -169,6 +171,7 @@ namespace MCQMCIntegration {
                                                   int probability)
     {
         DigitalNet<uint64_t> digitalNet(digitalNetId, s, m);
+        digitalNet.setDigitalShift(true);
         digitalNet.pointInitialize();
         OnlineVariance eachintval;
         uint32_t cnt = 0;
@@ -181,6 +184,7 @@ namespace MCQMCIntegration {
                 digitalNet.nextPoint();
             }
             eachintval.addData(intsum.getMean());
+            digitalNet.pointInitialize();
             cnt++;
         } while ( cnt < N );
         return MCQMCResult({eachintval.getMean(),

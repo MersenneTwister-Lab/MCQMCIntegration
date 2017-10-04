@@ -1,3 +1,7 @@
+2017-10-03  Mutsuo Saito <sai10@hiroshima-u.ac.jp>
+	* version 0.6
+	* change do always digital shift in MCQMCIntegration
+
 2017-08-03  Mutsuo Saito <sai10@hiroshima-u.ac.jp>
 	* version 0.5
 	* add test
