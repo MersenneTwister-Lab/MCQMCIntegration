@@ -55,10 +55,18 @@ namespace {
         {"Sobol", "sobolbase", "Sobol"},
         {"Old_Sobol", "oldso", "Old Sobol"},
         {"NX_LowWAFOM", "nxlw", "NX+LowWAFOM, CV = (max(CV) + min(CV))/2"},
-        {"Sobol_LowWAFOM", "solw", "Sobol+LowWAFOM, CV = (max(CV) + min(CV))/2"}
+        {"Sobol_LowWAFOM", "solw", "Sobol+LowWAFOM, CV = (max(CV) + min(CV))/2"},
+        {"ISobol2", "sobol_alpha2", "Interlaced Sobol Alpha 2"},
+        {"ISobol3", "sobol_alpha3", "Interlaced Sobol Alpha 3"},
+        {"ISobol4", "sobol_alpha4", "Interlaced Sobol Alpha 4"},
+        {"ISobol5", "sobol_alpha5", "Interlaced Sobol Alpha 5"},
+        {"ISobol2LW", "soa2lw", "Interlaced Sobol Alpha 2 Low WAFOM"},
+        {"ISobol3LW", "soa3lw", "Interlaced Sobol Alpha 3 Low WAFOM"},
+        {"ISobol4LW", "soa4lw", "Interlaced Sobol Alpha 4 Low WAFOM"},
+        {"ISobol5LW", "soa5lw", "Interlaced Sobol Alpha 5 Low WAFOM"},
     };
 
-    const uint32_t digital_net_name_data_size = 5;
+    const uint32_t digital_net_name_data_size = 9; // to be 13
 
     const char * getDataPath()
     {
@@ -96,6 +104,33 @@ namespace {
         }
         uint64_t data[s * m];
         bool r = get_sobol_base(ifs, s, m, data);
+        if (!r) {
+            return -1;
+        }
+        if (sizeof(U) * 8  == 32) {
+            for (size_t i = 0; i < s * m; i++) {
+                base[i] = static_cast<U>((data[i] >> 32)
+                                         & UINT32_C(0xffffffff));
+            }
+        } else {
+            for (size_t i = 0; i < s * m; i++) {
+                base[i] = data[i];
+            }
+        }
+        return 0;
+    }
+
+    template<typename U>
+    int readInterlacedSobolBase(const string& path, uint32_t s, uint32_t m,
+                                U base[])
+    {
+        ifstream ifs(path, ios::in | ios::binary);
+        if (!ifs) {
+            cerr << "can't open:" << path << endl;
+            return -1;
+        }
+        uint64_t data[s * m];
+        bool r = get_interlaced_sobol_base(ifs, s, m, data);
         if (!r) {
             return -1;
         }
@@ -561,9 +596,18 @@ namespace MCQMCIntegration {
     uint32_t getSMax(DigitalNetID id)
     {
         string path = makePath("digitalnet", ".sqlite3");
-        if (id == SOBOL) {
+        switch (id) {
+        case SOBOL:
             return get_sobol_s_max();
-        } else {
+        case ISOBOL_A2:
+            return get_interlaced_sobol_s_max(path, 2);
+        case ISOBOL_A3:
+            return get_interlaced_sobol_s_max(path, 3);
+        case ISOBOL_A4:
+            return get_interlaced_sobol_s_max(path, 4);
+        case ISOBOL_A5:
+            return get_interlaced_sobol_s_max(path, 5);
+        default:
             int min = 0;
             int max = 0;
             int r = get_s_minmax(path, id, &min, &max);
@@ -578,9 +622,18 @@ namespace MCQMCIntegration {
     uint32_t getSMin(DigitalNetID id)
     {
         string path = makePath("digitalnet", ".sqlite3");
-        if (id == SOBOL) {
+        switch (id) {
+        case SOBOL:
             return get_sobol_s_min();
-        } else {
+        case ISOBOL_A2:
+            return get_interlaced_sobol_s_min(path, 2);
+        case ISOBOL_A3:
+            return get_interlaced_sobol_s_min(path, 3);
+        case ISOBOL_A4:
+            return get_interlaced_sobol_s_min(path, 4);
+        case ISOBOL_A5:
+            return get_interlaced_sobol_s_min(path, 5);
+        default:
             int min = 0;
             int max = 0;
             int r = get_s_minmax(path, id, &min, &max);
@@ -595,9 +648,18 @@ namespace MCQMCIntegration {
     uint32_t getMMax(DigitalNetID id, uint32_t s)
     {
         string path = makePath("digitalnet", ".sqlite3");
-        if (id == SOBOL) {
+        switch (id) {
+        case SOBOL:
             return get_sobol_m_max();
-        } else {
+        case ISOBOL_A2:
+            return get_interlaced_sobol_m_max(path, 2, s);
+        case ISOBOL_A3:
+            return get_interlaced_sobol_m_max(path, 3, s);
+        case ISOBOL_A4:
+            return get_interlaced_sobol_m_max(path, 4, s);
+        case ISOBOL_A5:
+            return get_interlaced_sobol_m_max(path, 5, s);
+        default:
             int min = 0;
             int max = 0;
             int r = get_m_minmax(path, id, s, &min, &max);
@@ -612,9 +674,18 @@ namespace MCQMCIntegration {
     uint32_t getMMin(DigitalNetID id, uint32_t s)
     {
         string path = makePath("digitalnet", ".sqlite3");
-        if (id == SOBOL) {
+        switch (id) {
+        case SOBOL:
             return get_sobol_m_min();
-        } else {
+        case ISOBOL_A2:
+            return get_interlaced_sobol_m_min(path, 2, s);
+        case ISOBOL_A3:
+            return get_interlaced_sobol_m_min(path, 3, s);
+        case ISOBOL_A4:
+            return get_interlaced_sobol_m_min(path, 4, s);
+        case ISOBOL_A5:
+            return get_interlaced_sobol_m_min(path, 5, s);
+        default:
             int min = 0;
             int max = 0;
             int r = get_m_minmax(path, id, s, &min, &max);
@@ -694,11 +765,18 @@ namespace MCQMCIntegration {
                            int64_t * tvalue, double * wafom)
     {
         //return read_digital_net_data(id, s, m, base, tvalue, wafom);
-        if (id == SOBOL) {
-            string name = digital_net_name_data[id].abb;
-            string path = makePath(name, ".dat");
+        string name = digital_net_name_data[id].abb;
+        string path = makePath(name, ".dat");
+        switch (id) {
+        case SOBOL:
             return readSobolBase(path, s, m, base);
-        } else {
+        case ISOBOL_A2:
+        case ISOBOL_A3:
+        case ISOBOL_A4:
+        case ISOBOL_A5:
+            path = makePath(name, "_Bs53.col");
+            return readInterlacedSobolBase(path, s, m, base);
+        default:
             return select_digital_net_data(id, s, m, base, tvalue, wafom);
         }
     }
@@ -708,11 +786,18 @@ namespace MCQMCIntegration {
                            int64_t * tvalue, double * wafom)
     {
         //return read_digital_net_data(id, s, m, base, tvalue, wafom);
-        if (id == SOBOL) {
-            string name = digital_net_name_data[id].abb;
-            string path = makePath(name, ".dat");
+        string name = digital_net_name_data[id].abb;
+        string path = makePath(name, ".dat");
+        switch (id) {
+        case SOBOL:
             return readSobolBase(path, s, m, base);
-        } else {
+        case ISOBOL_A2:
+        case ISOBOL_A3:
+        case ISOBOL_A4:
+        case ISOBOL_A5:
+            path = makePath(name, "_Bs53.col");
+            return readInterlacedSobolBase(path, s, m, base);
+        default:
             return select_digital_net_data(id, s, m, base, tvalue, wafom);
         }
     }
@@ -810,6 +895,28 @@ namespace MCQMCIntegration {
             // shift して1を立てている
             uint64_t tmp = (point_base[i] ^ shift[i]) >> get_max;
             point[i] = static_cast<double>(tmp) * factor + eps;
+        }
+    }
+
+    void DigitalNet<uint64_t>::linearScramble() {
+        const size_t N = 64;
+        uint64_t LowTriMat[N];
+        uint64_t tmp;
+        const uint64_t one = 1;
+        for (size_t i = 0; i < s; i++) {
+            // 正則な下三角行列を作る
+            for (size_t j = 0; j < N; j++) {
+                uint64_t p2 = one << (N - j - 1);
+                LowTriMat[j] = (mt() << (N - j - 1)) | p2;
+            }
+            for (size_t k = 0; k < m; k++) {
+                tmp = UINT64_C(0);
+                for (size_t j = 0; j < N; j++) {
+                    uint64_t bit = innerProduct(LowTriMat[j], getBase(k, i));
+                    tmp ^= bit << (N - j - 1);
+                }
+                setBase(k, i, tmp);
+            }
         }
     }
 

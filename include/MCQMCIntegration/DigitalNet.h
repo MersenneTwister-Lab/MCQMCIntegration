@@ -39,7 +39,23 @@ namespace MCQMCIntegration {
         /** Niederreiter-Xing point set of Low WAFOM. */
         NXLW = 3,
         /** Sobol point set of Low WAFOM. */
-        SOLW = 4
+        SOLW = 4,
+        /** Interlaced Sobol Alpha 2 */
+        ISOBOL_A2 = 5,
+        /** Interlaced Sobol Alpha 3 */
+        ISOBOL_A3 = 6,
+        /** Interlaced Sobol Alpha 4 */
+        ISOBOL_A4 = 7,
+        /** Interlaced Sobol Alpha 5 */
+        ISOBOL_A5 = 8,
+        /** Interlaced Sobol Alpha 2 of Low WAFOM */
+        ISOBOL_A2_LW = 9,
+        /** Interlaced Sobol Alpha 3 of Low WAFOM */
+        ISOBOL_A3_LW = 10,
+        /** Interlaced Sobol Alpha 4 of Low WAFOM */
+        ISOBOL_A4_LW = 11,
+        /** Interlaced Sobol Alpha 5 of Low WAFOM */
+        ISOBOL_A5_LW = 12
     };
 
     /**
@@ -223,6 +239,7 @@ namespace MCQMCIntegration {
         int64_t getTvalue() {
             return tvalue;
         }
+        void linearScramble();
     private:
         void setBase(int i, int j, uint64_t value) {
             base[i * s + j] = value;

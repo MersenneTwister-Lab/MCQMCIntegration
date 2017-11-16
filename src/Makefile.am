@@ -4,7 +4,7 @@ lib_LIBRARIES = libmcqmcint.a
 
 libmcqmcint_a_SOURCES = MCQMCIntegration.cpp \
 	DigitalNet.cpp $(digital_header) \
-	sobolpoint.cpp
+	sobolpoint.cpp interlaced_sobolpoint.cpp
 
 noinst_PROGRAMS = sobolpoint
 sobolpoint_SOURCES = sobolpoint_main.cpp sobolpoint.cpp
